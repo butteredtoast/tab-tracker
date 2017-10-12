@@ -16,6 +16,8 @@
       v-model="password"
     />
     <br/>
+    <div class="error" v-html="error"></div>
+    <br/>
     <button @click="register">Register</button>
   </div>
 </template>
@@ -27,15 +29,21 @@
     data () {
       return {
         email: '',
-        password: ''
+        password: '',
+        error: null
       }
     },
     methods: {
       async register () {
-        await AuthenticationService.register({
-          email: this.email,
-          password: this.password
-        })
+        try {
+          await AuthenticationService.register({
+            email: this.email,
+            password: this.password
+          })
+        } catch (error) {
+          this.error = error.response.data.error
+          console.warn('We have an error here!!')
+        }
       }
     }
   }
@@ -59,5 +67,9 @@ li {
 
 a {
   color: #42b983;
+}
+
+.error {
+  color: red;
 }
 </style>

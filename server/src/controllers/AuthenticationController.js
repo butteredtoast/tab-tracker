@@ -1,9 +1,11 @@
-const {user} = require('../models')
+const {User} = require('../models')
 
 module.exports = {
     async register(req, res) {
         try{
-            const usr = await user.create(req.body)
+            body = req.body
+            console.log("Body is: ", body)                        
+            const usr = await User.create(body)
             res.send({message: usr.toJSON()})
         } catch(err) {
             console.warn("Error! ", err)

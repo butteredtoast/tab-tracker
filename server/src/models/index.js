@@ -25,9 +25,14 @@ fs
         file !== "index.js"
     )
     .forEach((file) => {        
-        const model = sequelize.import(path.join(__dirname, file))        
+        const model = sequelize.import(path.join(__dirname, file))
         db[file.slice(0, -3)] = model
-    })
+        // model
+        //     .create({ email: 'test@example.com', password: 'plain text' })
+        //     .then(user =>
+        //         console.log("The created user's email is: ", user.get('email'))
+        //     )
+    })    
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize
